@@ -24,7 +24,6 @@
     }
     body {
       background-color: color-mix(in oklab, var(--color-base-100), black 20%) !important;
-
     }
 
     #rato {

@@ -5,9 +5,62 @@ date: 2026-02-21
 layout: layouts/blog.njk
 ---
 
-This is a simple test post to validate typography, layout behavior, and semantic rendering inside `blog.njk`.
+With the Midnight Club 3 modding scene steadily growing, I feel this is the right time to share some modding resources — and a few insights from my own experience working with PlayStation 2 titles.
 
-It includes headings, lists, code blocks, and tables.
+---
+
+## What Is Function Hooking?
+
+When I say *hooking*, I mean patching the game's executable code to introduce custom behavior.
+
+More technically, function hooking is a modding technique that redirects the game’s control flow. We patch an existing routine so that execution jumps to our own injected code, runs whatever logic we want, and optionally returns to the original function.
+
+On the PS2, this typically involves modifying MIPS instructions inside the ELF, redirecting them to a custom code region (often called a *code cave*).
+
+---
+
+## Common Misconceptions
+
+### 1. “PS2 games are easy to mod like PC games.”
+
+Most PS2 games are written in **compiled languages** such as C or C++. Unlike interpreted languages, compiled binaries do not preserve high-level structure in a readable form.
+
+That means:
+
+- No source code
+- No easy scripting layer (unless the developers added one)
+
+For comparison:
+- Minecraft Java Edition had a modding community from day one.
+- Minecraft Bedrock Edition (C++) only gained a strong modding ecosystem after Microsoft introduced official APIs.
+
+Console games generally do not ship with modding APIs.
+
+---
+
+### 2. “All games are equally moddable.”
+
+Some PS2 games ship with **debug symbols**. Others do not.
+
+This makes a massive difference.
+
+If debug symbols are present:
+- Function names are preserved
+- Class names may exist
+- Structures are easier to identify
+- Reverse engineering is significantly faster
+
+If they are stripped:
+- Everything becomes `sub_XXXXXXXX`
+- You must infer behavior manually
+- Reverse engineering takes much longer
+
+The only AGE engine titles I know of that contain debug symbols are:
+
+- Test Drive: Off-Road: Wide Open
+- The leaked Oni 2 prototype
+
+Most commercial PS2 releases strip them.
 
 ---
 
@@ -16,49 +69,101 @@ It includes headings, lists, code blocks, and tables.
 Function hooking on the PlayStation 2 is commonly used for:
 
 - Debugging internal game logic
-- Modding behavior at runtime
+- Modifying behavior at runtime
 - Logging execution flow
-- Patching broken mechanics
+- Fixing broken mechanics
+- Injecting new features
+- Overriding hardcoded limits
 
-### Typical Workflow
-
-1. Locate target function in ELF
-2. Identify call sites or entry point
-3. Redirect jump to custom stub
-4. Preserve registers
-5. Return cleanly
+Because PS2 games are fully compiled, hooking is often the most practical way to extend functionality without rewriting entire systems.
 
 ---
 
-## Hook Types
+## Useful Tools for Hooking
 
-### 1. Direct Jump Patch
+### Decompilers / Disassemblers
+- Ghidra  
+- IDA Pro  
+- Binary Ninja  
 
-Replace the first instruction with a jump.
+These are essential for understanding the game’s control flow and identifying candidate functions.
 
-- Fast
-- Dangerous if function is small
-- Must preserve original instructions
+### PCSX2 Debugger
+The PCSX2 debugger allows:
+- Breakpoints
+- Step execution
+- Memory inspection
+- Register inspection
 
-### 2. Import Table Redirection
+This is critical for understanding runtime behavior.
 
-Modify imported symbol reference.
+### PS2dev
+[https://github.com/ps2dev/ps2dev](https://github.com/ps2dev/ps2dev)
 
-- Cleaner
-- Safer
-- Requires symbol visibility
+PS2dev includes everything needed for PlayStation 2 development:
+- Emotion Engine GNU toolchain
+- C/C++ compiler
+- Linker
+- Binutils
+- IRX tools
+
+This allows you to compile real MIPS code targeting the Emotion Engine.
+
+### Armips
+[https://github.com/Kingcom/armips](https://github.com/Kingcom/armips)
+
+Armips is an assembler that supports:
+- Overwriting specific areas of a binary
+- Injecting raw assembly
+- Linking `.o` and `.a` files produced by compilers
+
+It is extremely useful for patch-based workflows.
 
 ---
 
-## Example Stub (Conceptual)
+## My Typical Workflow
 
-#### Register Preservation Example
+Here’s how I usually approach a hook:
 
-```c
-void hook_stub() {
-    // save registers
-    // call custom code
-    // restore registers
-    // jump back
-}
-```
+1. Locate the target function inside the ELF.
+2. Analyze the function’s calling convention and side effects.
+3. Find or create a code cave (unused executable space).
+4. Compile custom C/assembly code using PS2dev.
+5. Use Armips to:
+   - Inject compiled object code
+   - Patch original instructions
+   - Redirect execution with a `j` or `jal`
+
+Understanding MIPS calling conventions (especially `$ra`, `$sp`, and saved registers) is critical to avoiding crashes.
+
+---
+
+## Example Repository
+
+You can find a concrete example here:
+
+[https://github.com/AlgumCorrupto/mc3-function-hooking](https://github.com/AlgumCorrupto/mc3-function-hooking)
+
+This repository contains multiple branches, but I recommend starting with the `master` branch.
+
+- `src/` contains the C code that gets injected.
+- `linker.asm` contains the Armips script that performs the injection and patching.
+
+Reading both together will give you a clear picture of how the workflow fits end-to-end.
+
+---
+
+## Final Thoughts
+
+Function hooking on the PlayStation 2 is not “easy” — but it is extremely powerful.
+
+Once you understand:
+
+- MIPS instruction flow
+- ELF structure
+- The Emotion Engine calling conventions
+- Binary patching
+
+You can modify nearly any behavior in a PS2 title.
+
+The barrier to entry is high, but the control it gives you is absolute.
