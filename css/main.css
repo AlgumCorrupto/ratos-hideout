@@ -1,0 +1,184 @@
+@import "tailwindcss";
+@import "./themes.css";
+@import "./fonts.css";
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+@plugin "@tailwindcss/typography";
+
+@plugin "daisyui" {
+    themes: monokai-pro-dark --default, monokai-pro-dark --prefersdark;
+    root: ":root";
+    include: ;
+    exclude: ;
+    prefix: ;
+    logs: true;
+}
+@layer components {
+    a {
+        @apply text-primary!;
+    }
+    :root {
+      background-color: color-mix(in oklab, var(--color-base-100), black 20%) !important;
+
+    }
+    body {
+      background-color: color-mix(in oklab, var(--color-base-100), black 20%) !important;
+
+    }
+
+    #rato {
+        @apply absolute;
+        left: 0;
+        top: 0;
+        transform-origin: center;
+        animation: pop 4s infinite linear;
+        transform: rotate(-15deg) translate(-3em, -2em)
+    }
+
+    nav.navbar {
+        @apply w-full;
+        @apply mx-auto pb-6;
+        @apply rounded-md;
+        @apply pt-3;
+
+        @apply text-base-content;
+        @apply w-full max-w-3xl mx-auto px-0! pb-6;
+        @apply flex flex-col;
+    }
+
+    nav.navbar h1 {
+        @apply text-4xl;
+        @apply px-0;
+        @apply text-primary;
+        @apply font-bold;
+        @apply mt-8!;
+        @apply mb-8!;
+    }
+
+    nav.navbar a {
+        @apply font-light;
+    }
+
+    nav.navbar a:hover {
+        @apply underline;
+    }
+
+    nav.navbar ul {
+        @apply bg-base-200 w-full max-w-3xl mx-auto py-2 px-6;
+        @apply rounded-md;
+        @apply flex;
+        @apply justify-evenly;
+        @apply relative;
+
+        @apply bg-base-200 text-base-content;
+
+        @apply shadow;
+
+        /* subtle border contrast */
+        border-top:    2px solid theme("colors.base-300");
+        border-left:   2px solid theme("colors.base-100");
+        border-right:  2px solid theme("colors.base-100");
+        border-bottom: 2px solid theme("colors.base-100");
+    }
+
+    hr {
+        @apply bg-base-100! text-base-content! px-6! rounded-md!;
+
+        /* Use a lighter shade */
+        border-top: 2px solid color-mix(in srgb, theme('colors.base-200'), white 10%) !important;
+        border-right: 2px solid color-mix(in srgb, theme('colors.base-200'), white 10%) !important;
+        border-left: 2px solid color-mix(in srgb, theme('colors.base-200'), white 10%) !important;
+        border-bottom: 2px solid color-mix(in srgb, theme('colors.base-200'), white 75%) !important;
+        mix-blend-mode: overlay !important; /* Makes bright areas brighter */
+        box-shadow:
+          inset 2px 2px 4px rgba(0,0,0,0.25),
+          inset -2px -2px 4px rgba(0,0,0,0.25) !important;
+    }
+
+    code:not(pre code) {
+        @apply bg-base-100!;
+        border-top: 2px solid theme('colors.base-100') !important;    /* lighter top */
+        border-left: 2px solid theme('colors.base-100') !important;
+        border-bottom: 2px solid theme('colors.base-300') !important; /* darker bottom */
+        border-right: 2px solid theme('colors.base-100') !important;
+
+        /* inset shadows for depth */
+        box-shadow:
+          inset 2px 2px 4px rgba(0,0,0,0.25),  /* shadow bottom-right */
+          inset -2px -2px 4px rgba(0,0,0,0.25); /* highlight top-left */
+    }
+
+    /* factorio-card.css */
+    .fs1 {
+      @apply bg-base-100 text-base-content px-6 rounded-md;
+
+      /* directional borders for 3D sunken effect */
+      border-top: 2px solid theme('colors.base-100');    /* lighter top */
+      border-left: 2px solid theme('colors.base-100');
+      border-bottom: 2px solid theme('colors.base-300'); /* darker bottom */
+      border-right: 2px solid theme('colors.base-100');
+
+      /* inset shadows for depth */
+      box-shadow:
+        inset 2px 2px 4px rgba(0,0,0,0.25),  /* shadow bottom-right */
+        inset -2px -2px 4px rgba(0,0,0,0.25); /* highlight top-left */
+    }
+
+    .fs2 {
+        @apply bg-base-300 text-base-content px-6 rounded-md;
+
+        /* directional borders for 3D sunken effect */
+        border-top: 2px solid theme('colors.base-100');    /* lighter top */
+        border-left: 2px solid theme('colors.base-100');
+        border-bottom: 2px solid theme('colors.base-300'); /* darker bottom */
+        border-right: 2px solid theme('colors.base-100');
+
+        /* inset shadows for depth */
+        box-shadow:
+          inset 2px 2px 4px rgba(0,0,0,0.25),  /* shadow bottom-right */
+          inset -2px -2px 4px rgba(0,0,0,0.25); /* highlight top-left */
+    }
+
+    .obs {
+        @apply text-base-content/60;
+    }
+
+    pre {
+        @apply bg-base-300 text-base-content px-6 rounded-md;
+
+        /* directional borders for 3D sunken effect */
+        border-top: 2px solid theme('colors.base-100');    /* lighter top */
+        border-left: 2px solid theme('colors.base-100');
+        border-bottom: 2px solid theme('colors.base-300'); /* darker bottom */
+        border-right: 2px solid theme('colors.base-100');
+
+        /* inset shadows for depth */
+        box-shadow:
+          inset 2px 2px 4px rgba(0,0,0,0.25),  /* shadow bottom-right */
+          inset -2px -2px 4px rgba(0,0,0,0.25); /* highlight top-left */
+    }
+
+    body {
+        @apply bg-base-100;
+    }
+
+    /* main popping-out panel */
+    main {
+      @apply prose mt-3 bg-base-200 max-w-3xl mx-auto px-6 pb-12;
+      @apply rounded-md;
+
+      @apply bg-base-200 text-base-content;
+
+      @apply shadow;
+
+      /* subtle border contrast */
+      border-top:    3px solid theme("colors.base-300");
+      border-left:   3px solid theme("colors.base-100");
+      border-right:  3px solid theme("colors.base-100");
+      border-bottom: 3px solid theme("colors.base-100");
+    }
+
+    .main-name {
+        @apply font-bold;
+        @apply mt-4;
+    }
+}

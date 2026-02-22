@@ -1,0 +1,23 @@
+<!-- src/_layouts/base.njk -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{"Rato's Hideout | " + title  }}</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+
+  {% include "components/navbar.njk" %}
+
+  <main class="">
+    <h3 class="main-name">{{title}}</h3>
+    <div class="prose">
+      {{ content | safe }}
+    </div>
+  </main>
+
+</body>
+</html>

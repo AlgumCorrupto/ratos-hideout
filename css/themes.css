@@ -1,0 +1,161 @@
+/* Monokai Pro Dark Theme */
+@plugin "daisyui/theme" {
+  name: "monokai-pro-dark";
+  default: true;
+  prefersdark: true;
+  color-scheme: dark;
+
+  /* Base colors from Monokai Pro */
+  --color-base-100: #1e1f1c;    /* SideBar Background / Debug Toolbar */
+  --color-base-200: #272822;    /* Editor Background */
+  --color-base-300: #34352f;    /* Editor Group Border / Tab Inactive */
+  --color-base-content: #f8f8f2; /* Editor Foreground */
+
+  /* Primary - Monokai Green */
+  --color-primary: #e2e22e;
+  --color-primary-content: #272822;
+
+  /* Secondary - Monokai Pink */
+  --color-secondary: #f92672;
+  --color-secondary-content: #f8f8f2;
+
+  /* Accent - Monokai Purple */
+  --color-accent: #ae81ff;
+  --color-accent-content: #272822;
+
+  /* Neutral - Dark Gray */
+  --color-neutral: #414339;
+  --color-neutral-content: #f8f8f2;
+
+  /* Info - Monokai Blue/Cyan */
+  --color-info: #819aff;
+  --color-info-content: #272822;
+
+  /* Success - Monokai Green */
+  --color-success: #a6e22e;
+  --color-success-content: #272822;
+
+  /* Warning - Monokai Yellow */
+  --color-warning: #e2e22e;
+  --color-warning-content: #272822;
+
+  /* Error - Monokai Pink/Red */
+  --color-error: #f92672;
+  --color-error-content: #272822;
+
+  /* Border radius - Monokai sharp aesthetic */
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.25rem;
+
+  /* Base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* Border size */
+  --border: 1px;
+
+  /* Effects - minimal for Monokai clean look */
+  --depth: 0;
+  --noise: 0;
+}
+
+/* Monokai Pro Light Theme */
+@plugin "daisyui/theme" {
+  name: "monokai-pro-light";
+  default: false;
+  prefersdark: false;
+  color-scheme: light;
+
+  /* Base colors - inverted for light mode */
+  --color-base-100: #f8f8f2;    /* Light background */
+  --color-base-200: #ffffff;    /* Pure white */
+  --color-base-300: #e3e3dd;    /* Light gray */
+  --color-base-content: #272822; /* Dark text */
+
+  /* Primary - Monokai Green (darker for light bg) */
+  --color-primary: #b3b42b;
+  --color-primary-content: #ffffff;
+
+  /* Secondary - Monokai Pink/Red */
+  --color-secondary: #c4265e;
+  --color-secondary-content: #ffffff;
+
+  /* Accent - Monokai Purple */
+  --color-accent: #8c6bc8;
+  --color-accent-content: #ffffff;
+
+  /* Neutral - Light gray */
+  --color-neutral: #e3e3dd;
+  --color-neutral-content: #272822;
+
+  /* Info - Monokai Blue */
+  --color-info: #6a7ec8;
+  --color-info-content: #ffffff;
+
+  /* Success - Monokai Green */
+  --color-success: #86b42b;
+  --color-success-content: #ffffff;
+
+  /* Warning - Monokai Yellow */
+  --color-warning: #b3b42b;
+  --color-warning-content: #ffffff;
+
+  /* Error - Monokai Pink/Red */
+  --color-error: #c4265e;
+  --color-error-content: #ffffff;
+
+  /* Border radius - keeping consistent with dark theme */
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.25rem;
+
+  /* Base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* Border size */
+  --border: 1px;
+
+  /* Effects */
+  --depth: 0;
+  --noise: 0;
+}
+
+/* Optional: Add Monokai-specific utility classes */
+@layer utilities {
+  .bg-monokai-hover {
+    background-color: #3e3d32;
+  }
+  .bg-monokai-active {
+    background-color: #75715e;
+  }
+  .text-monokai-muted {
+    color: #90908a;
+  }
+  .border-monokai {
+    border-color: #75715e;
+  }
+  .border-monokai-light {
+    border-color: #414339;
+  }
+}
+
+/* Light theme overrides for utilities */
+[data-theme="monokai-pro-light"] {
+  .bg-monokai-hover {
+    background-color: #e3e3dd;
+  }
+  .bg-monokai-active {
+    background-color: #75715e;
+  }
+  .text-monokai-muted {
+    color: #90908a;
+  }
+  .border-monokai {
+    border-color: #cccccc;
+  }
+  .border-monokai-light {
+    border-color: #e3e3dd;
+  }
+}

@@ -1,0 +1,25 @@
+---
+layout: layouts/base.njk
+---
+
+<article>
+  {% if header != false %}
+    <header class="fs1">
+      {% if date %}
+        {% set d = date %}
+        <p>
+          <time class="obs" date="{{ d.toISOString().slice(0,10) }}">
+            {{ d.toLocaleDateString("en-US", { month:"long", day:"numeric", year:"numeric" }) }}
+          </time>
+        </p>
+      {% endif %}
+      {% if description %}
+        <p>{{ description }}</p>
+      {% endif %}
+    </header>
+  {% endif %}
+
+  <section>
+    {{ content | safe }}
+  </section>
+</article>

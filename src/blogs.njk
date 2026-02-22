@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+title: Blog Posts
+header: false
+---
+
+<ul class="list-none!">
+  {% for blog in collections.blog %}
+    <li class="fs2 py-2 pl-6">
+      <h3 class="mt-4! mb-0!">
+        <a href="{{ blog.url }}" target="_blank" rel="noopener">
+          {{ blog.data.title }}
+        </a>
+      </h3>
+      <p class="mb-2!">{{ blog.data.description }}</p>
+      <hr class="mt-0! mb-4!">
+      <time class="obs" date="{{ blog.data.date.toISOString().slice(0,10) }}">
+        {{ blog.data.date.toLocaleDateString("en-US", { month:"long", day:"numeric", year:"numeric" }) }}
+      </time>
+    </li>
+  {% endfor %}
+  <p>More sowon...</p>
+</ul>

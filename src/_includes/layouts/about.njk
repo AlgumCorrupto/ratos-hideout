@@ -1,0 +1,10 @@
+---
+layout: layouts/base.njk
+---
+
+<article>
+    {% include "components/latest-blogs.njk" %}
+    <section>
+      {{ content | safe }}
+    </section>
+</article>

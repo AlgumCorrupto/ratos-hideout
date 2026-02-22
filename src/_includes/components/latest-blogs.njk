@@ -1,0 +1,10 @@
+<div class="fs1">
+  <p class="obs">Latest blogs</p>
+  <ul>
+    {% for article in collections.blog %}
+      {% if loop.index0 < 4 %}
+        <li><a href="{{ article.url }}">{{ article.data.title }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>

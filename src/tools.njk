@@ -1,0 +1,49 @@
+---
+layout: layouts/base.njk
+title: Tools of the trade
+---
+<nav class="fs1">
+  <p class="obs">Categories</p>
+  <ul>
+    {% for game, items in collections.toolsByGame %}
+      <li>
+        <a href="#{{ game | slug }}">{{ game }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>
+
+{% for game, items in collections.toolsByGame %}
+  <hr>
+  <section>
+    <h2 id="{{ game | slug }}"> {{ game }}</h2>
+    <ul class="list-none! pl-0!">
+      {% for tool in items %}
+        <li class="fs2 py-2 pl-6">
+          <h3 class="mt-4! mb-0!">
+            <a href="{{ tool.data.download }}" target="_blank" rel="noopener">
+              {{ tool.data.title }}
+            </a>
+          </h3>
+
+          <p class="mb-2!">{{ tool.data.description }}</p>
+
+          <hr class="mt-0! mb-4!">
+
+          {% if tool.templateContent %}
+            <details>
+              <summary>Installation Instructions</summary>
+              <div>
+                {{ tool.templateContent | safe }}
+              </div>
+            </details>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endfor %}
+
+<hr>
+
+<small>More sowon :) </small>

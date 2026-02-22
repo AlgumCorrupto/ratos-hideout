@@ -1,0 +1,29 @@
+{
+  "name": "ac-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./css/main.css -o ./public/css/style.css --minify",
+    "watch:css": "tailwindcss -i ./css/main.css -o ./public/css/style.css --watch",
+    "watch:eleventy": "eleventy --serve",
+    "watch": "npm-run-all --parallel watch:css watch:eleventy",
+    "build": "npm run build:css && eleventy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@tailwindcss/cli": "^4.2.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "autoprefixer": "^10.4.24",
+    "daisyui": "^5.5.19",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.2.0"
+  }
+}
