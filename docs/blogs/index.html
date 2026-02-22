@@ -1,0 +1,77 @@
+<!-- src/_layouts/base.njk -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rato&#39;s Hideout | Blog Posts</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <h1 class="mb-4!">ℜ𝔞𝔱𝔬'𝔰 ℌ𝔦𝔡𝔢𝔬𝔲𝔱</h1>
+    <ul>
+        <img src="/public/rat.svg" id="rato" />
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/blogs/">Blog</a></li>
+    </ul>
+</nav>
+
+<script>
+const rato = document.getElementById('rato');
+const baseScale = 1;       // normal size
+const amplitude = 0.05;     // scale oscillation +-0.2
+const period = 16000;       // 4 seconds for full sine wave
+const rotate = -5;         // degrees
+const tx = 1;             // em translation x
+const ty = -2.5;             // em translation y
+
+let start = null;
+
+function animate(time) {
+  if (!start) start = time;
+  const t = time - start;
+
+  // sine scaling
+  const scale = baseScale + amplitude * Math.sin((2 * Math.PI * t) / period);
+  //const scale = baseScale;
+
+  // apply rotation, translation, and scale
+  rato.style.transform = `rotate(${rotate}deg) translate(${tx}em, ${ty}em) scale(${scale})`;
+
+  requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
+</script>
+
+  <main class="">
+    <h3 class="main-name">Blog Posts</h3>
+    <div class="prose">
+      
+<ul class="list-none!">
+  
+    <li class="fs2 py-2 pl-6">
+      <h3 class="mt-4! mb-0!">
+        <a href="/blogs/function-hooking-ps2/" target="_blank" rel="noopener">
+          Function Hooking on PS2
+        </a>
+      </h3>
+      <p class="mb-2!">Understanding symbol redirection on the Emotion Engine.</p>
+      <hr class="mt-0! mb-4!">
+      <time class="obs" date="2026-02-21">
+        February 20, 2026
+      </time>
+    </li>
+  
+  <p>More sowon...</p>
+</ul>
+
+    </div>
+  </main>
+
+</body>
+</html>

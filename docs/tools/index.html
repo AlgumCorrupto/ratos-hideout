@@ -1,0 +1,240 @@
+<!-- src/_layouts/base.njk -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rato&#39;s Hideout | Tools of the trade</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <h1 class="mb-4!">ℜ𝔞𝔱𝔬'𝔰 ℌ𝔦𝔡𝔢𝔬𝔲𝔱</h1>
+    <ul>
+        <img src="/public/rat.svg" id="rato" />
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/blogs/">Blog</a></li>
+    </ul>
+</nav>
+
+<script>
+const rato = document.getElementById('rato');
+const baseScale = 1;       // normal size
+const amplitude = 0.05;     // scale oscillation +-0.2
+const period = 16000;       // 4 seconds for full sine wave
+const rotate = -5;         // degrees
+const tx = 1;             // em translation x
+const ty = -2.5;             // em translation y
+
+let start = null;
+
+function animate(time) {
+  if (!start) start = time;
+  const t = time - start;
+
+  // sine scaling
+  const scale = baseScale + amplitude * Math.sin((2 * Math.PI * t) / period);
+  //const scale = baseScale;
+
+  // apply rotation, translation, and scale
+  rato.style.transform = `rotate(${rotate}deg) translate(${tx}em, ${ty}em) scale(${scale})`;
+
+  requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
+</script>
+
+  <main class="">
+    <h3 class="main-name">Tools of the trade</h3>
+    <div class="prose">
+      <nav class="fs1">
+  <p class="obs">Categories</p>
+  <ul>
+    
+      <li>
+        <a href="#midnight-club-3-d.e.-remix">Midnight Club 3 D.E. Remix</a>
+      </li>
+    
+      <li>
+        <a href="#midnight-club-l.a.-remix">Midnight Club L.A. Remix</a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <hr>
+  <section>
+    <h2 id="midnight-club-3-d.e.-remix"> Midnight Club 3 D.E. Remix</h2>
+    <ul class="list-none! pl-0!">
+      
+        <li class="fs2 py-2 pl-6">
+          <h3 class="mt-4! mb-0!">
+            <a href="https://github.com/AlgumCorrupto/CinematicClub/tags" target="_blank" rel="noopener">
+              Cinematic Club
+            </a>
+          </h3>
+
+          <p class="mb-2!">Freecam + Speedometer (old) + FlyHack for mc3r</p>
+
+          <hr class="mt-0! mb-4!">
+
+          
+            <details>
+              <summary>Installation Instructions</summary>
+              <div>
+                <ol>
+<li>Download the latest release from GitHub.</li>
+<li>Extract the archive.</li>
+<li>Launch the game.</li>
+<li>Run the .bat file for your desired mod</li>
+</ol>
+<blockquote>
+<p>Make sure you are using the correct game version.
+Also don't forget to read the readme.txt!</p>
+</blockquote>
+
+              </div>
+            </details>
+          
+        </li>
+      
+        <li class="fs2 py-2 pl-6">
+          <h3 class="mt-4! mb-0!">
+            <a href="https://github.com/AlgumCorrupto/racist/releases/" target="_blank" rel="noopener">
+              Race Instrument
+            </a>
+          </h3>
+
+          <p class="mb-2!">Race editor packer/unpacker</p>
+
+          <hr class="mt-0! mb-4!">
+
+          
+            <details>
+              <summary>Installation Instructions</summary>
+              <div>
+                <p><a href="https://www.youtube.com/watch?v=-kCnLBulrcw&amp;t=4s">Video showing the installation steps</a></p>
+
+              </div>
+            </details>
+          
+        </li>
+      
+        <li class="fs2 py-2 pl-6">
+          <h3 class="mt-4! mb-0!">
+            <a href="https://gist.github.com/AlgumCorrupto/b842e51166ec2e01e1a01ff0fc06fce3" target="_blank" rel="noopener">
+              Digital Speedometer (no DLL injection)
+            </a>
+          </h3>
+
+          <p class="mb-2!">Speedometer that supports KM/H, M/H, and M/S</p>
+
+          <hr class="mt-0! mb-4!">
+
+          
+            <details>
+              <summary>Installation Instructions</summary>
+              <div>
+                <ol>
+<li>Download the .pnach file</li>
+<li>Put it in your patches folder (On Windows usually is <code>C:\Users\&lt;your-user&gt;\Documents\PCSX2\patches\</code>)</li>
+<li>Open PCSX2</li>
+<li>Right click Midnight Club 3</li>
+<li>Open properties panel</li>
+<li>Enable the patch there.</li>
+</ol>
+<blockquote>
+<p>Beware that the mod only works on MC3R NTSC (american version)</p>
+</blockquote>
+
+              </div>
+            </details>
+          
+        </li>
+      
+        <li class="fs2 py-2 pl-6">
+          <h3 class="mt-4! mb-0!">
+            <a href="https://gist.github.com/AlgumCorrupto/a6e481728bdf2ba8d7b08d4c1bf66731" target="_blank" rel="noopener">
+              Digital Speedometer (16:9 hud fix)
+            </a>
+          </h3>
+
+          <p class="mb-2!">Version of the speedometer mod that works better with the 16:9 hud mod.</p>
+
+          <hr class="mt-0! mb-4!">
+
+          
+            <details>
+              <summary>Installation Instructions</summary>
+              <div>
+                <ol>
+<li>Download the .pnach file</li>
+<li>Put it in your patches folder (On Windows usually is <code>C:\Users\&lt;your-user&gt;\Documents\PCSX2\patches\</code>)</li>
+<li>Open PCSX2</li>
+<li>Right click Midnight Club 3</li>
+<li>Open properties panel</li>
+<li>Enable the patch there.</li>
+</ol>
+<blockquote>
+<p>Beware that the mod only works on MC3R NTSC (american version)</p>
+</blockquote>
+
+              </div>
+            </details>
+          
+        </li>
+      
+    </ul>
+  </section>
+
+  <hr>
+  <section>
+    <h2 id="midnight-club-l.a.-remix"> Midnight Club L.A. Remix</h2>
+    <ul class="list-none! pl-0!">
+      
+        <li class="fs2 py-2 pl-6">
+          <h3 class="mt-4! mb-0!">
+            <a href="https://gist.github.com/AlgumCorrupto/afddc6b41fd8b13523236eb54f03f595" target="_blank" rel="noopener">
+              8 Player Patch
+            </a>
+          </h3>
+
+          <p class="mb-2!">Enables 8 players on multiplayer.</p>
+
+          <hr class="mt-0! mb-4!">
+
+          
+            <details>
+              <summary>Installation Instructions</summary>
+              <div>
+                <ol>
+<li>Open MCLAR on PPSSPP,</li>
+<li>Open the ESC Menu,</li>
+<li>Navigate to cheats-&gt;edit cheat file,</li>
+<li>Copy &amp; Paste the contents of <code>ULUS10383.ini</code> (can be downloaded from the URL)</li>
+<li>Reload the game,</li>
+<li>Now you can select up to 8 players on multiplayer!</li>
+</ol>
+
+              </div>
+            </details>
+          
+        </li>
+      
+    </ul>
+  </section>
+
+
+<hr>
+
+<small>More sowon :) </small>
+    </div>
+  </main>
+
+</body>
+</html>

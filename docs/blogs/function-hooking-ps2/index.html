@@ -1,0 +1,213 @@
+<!-- src/_layouts/base.njk -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rato&#39;s Hideout | Function Hooking on PS2</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <h1 class="mb-4!">ℜ𝔞𝔱𝔬'𝔰 ℌ𝔦𝔡𝔢𝔬𝔲𝔱</h1>
+    <ul>
+        <img src="/public/rat.svg" id="rato" />
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/blogs/">Blog</a></li>
+    </ul>
+</nav>
+
+<script>
+const rato = document.getElementById('rato');
+const baseScale = 1;       // normal size
+const amplitude = 0.05;     // scale oscillation +-0.2
+const period = 16000;       // 4 seconds for full sine wave
+const rotate = -5;         // degrees
+const tx = 1;             // em translation x
+const ty = -2.5;             // em translation y
+
+let start = null;
+
+function animate(time) {
+  if (!start) start = time;
+  const t = time - start;
+
+  // sine scaling
+  const scale = baseScale + amplitude * Math.sin((2 * Math.PI * t) / period);
+  //const scale = baseScale;
+
+  // apply rotation, translation, and scale
+  rato.style.transform = `rotate(${rotate}deg) translate(${tx}em, ${ty}em) scale(${scale})`;
+
+  requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
+</script>
+
+  <main class="">
+    <h3 class="main-name">Function Hooking on PS2</h3>
+    <div class="prose">
+      
+<article>
+  
+    <header class="fs1">
+      
+        
+        <p>
+          <time class="obs" date="2026-02-21">
+            February 20, 2026
+          </time>
+        </p>
+      
+      
+        <p>Understanding symbol redirection on the Emotion Engine.</p>
+      
+    </header>
+  
+
+  <section>
+    <p>With the Midnight Club 3 modding scene steadily growing, I feel this is the right time to share some modding resources — and a few insights from my own experience working with PlayStation 2 titles.</p>
+<hr>
+<h2>What Is Function Hooking?</h2>
+<p>When I say <em>hooking</em>, I mean patching the game's executable code to introduce custom behavior.</p>
+<p>More technically, function hooking is a modding technique that redirects the game’s control flow. We patch an existing routine so that execution jumps to our own injected code, runs whatever logic we want, and optionally returns to the original function.</p>
+<p>On the PS2, this typically involves modifying MIPS instructions inside the ELF, redirecting them to a custom code region (often called a <em>code cave</em>).</p>
+<hr>
+<h2>Common Misconceptions</h2>
+<h3>1. “PS2 games are easy to mod like PC games.”</h3>
+<p>Most PS2 games are written in <strong>compiled languages</strong> such as C or C++. Unlike interpreted languages, compiled binaries do not preserve high-level structure in a readable form.</p>
+<p>That means:</p>
+<ul>
+<li>No source code</li>
+<li>No easy scripting layer (unless the developers added one)</li>
+</ul>
+<p>For comparison:</p>
+<ul>
+<li>Minecraft Java Edition had a modding community from day one.</li>
+<li>Minecraft Bedrock Edition (C++) only gained a strong modding ecosystem after Microsoft introduced official APIs.</li>
+</ul>
+<p>Console games generally do not ship with modding APIs.</p>
+<hr>
+<h3>2. “All games are equally moddable.”</h3>
+<p>Some PS2 games ship with <strong>debug symbols</strong>. Others do not.</p>
+<p>This makes a massive difference.</p>
+<p>If debug symbols are present:</p>
+<ul>
+<li>Function names are preserved</li>
+<li>Class names may exist</li>
+<li>Structures are easier to identify</li>
+<li>Reverse engineering is significantly faster</li>
+</ul>
+<p>If they are stripped:</p>
+<ul>
+<li>Everything becomes <code>sub_XXXXXXXX</code></li>
+<li>You must infer behavior manually</li>
+<li>Reverse engineering takes much longer</li>
+</ul>
+<p>The only AGE engine titles I know of that contain debug symbols are:</p>
+<ul>
+<li>Test Drive: Off-Road: Wide Open</li>
+<li>The leaked Oni 2 prototype</li>
+</ul>
+<p>Most commercial PS2 releases strip them.</p>
+<hr>
+<h2>Why Hook Functions?</h2>
+<p>Function hooking on the PlayStation 2 is commonly used for:</p>
+<ul>
+<li>Debugging internal game logic</li>
+<li>Modifying behavior at runtime</li>
+<li>Logging execution flow</li>
+<li>Fixing broken mechanics</li>
+<li>Injecting new features</li>
+<li>Overriding hardcoded limits</li>
+</ul>
+<p>Because PS2 games are fully compiled, hooking is often the most practical way to extend functionality without rewriting entire systems.</p>
+<hr>
+<h2>Useful Tools for Hooking</h2>
+<h3>Decompilers / Disassemblers</h3>
+<ul>
+<li>Ghidra</li>
+<li>IDA Pro</li>
+<li>Binary Ninja</li>
+</ul>
+<p>These are essential for understanding the game’s control flow and identifying candidate functions.</p>
+<h3>PCSX2 Debugger</h3>
+<p>The PCSX2 debugger allows:</p>
+<ul>
+<li>Breakpoints</li>
+<li>Step execution</li>
+<li>Memory inspection</li>
+<li>Register inspection</li>
+</ul>
+<p>This is critical for understanding runtime behavior.</p>
+<h3>PS2dev</h3>
+<p><a href="https://github.com/ps2dev/ps2dev">https://github.com/ps2dev/ps2dev</a></p>
+<p>PS2dev includes everything needed for PlayStation 2 development:</p>
+<ul>
+<li>Emotion Engine GNU toolchain</li>
+<li>C/C++ compiler</li>
+<li>Linker</li>
+<li>Binutils</li>
+<li>IRX tools</li>
+</ul>
+<p>This allows you to compile real MIPS code targeting the Emotion Engine.</p>
+<h3>Armips</h3>
+<p><a href="https://github.com/Kingcom/armips">https://github.com/Kingcom/armips</a></p>
+<p>Armips is an assembler that supports:</p>
+<ul>
+<li>Overwriting specific areas of a binary</li>
+<li>Injecting raw assembly</li>
+<li>Linking <code>.o</code> and <code>.a</code> files produced by compilers</li>
+</ul>
+<p>It is extremely useful for patch-based workflows.</p>
+<hr>
+<h2>My Typical Workflow</h2>
+<p>Here’s how I usually approach a hook:</p>
+<ol>
+<li>Locate the target function inside the ELF.</li>
+<li>Analyze the function’s calling convention and side effects.</li>
+<li>Find or create a code cave (unused executable space).</li>
+<li>Compile custom C/assembly code using PS2dev.</li>
+<li>Use Armips to:
+<ul>
+<li>Inject compiled object code</li>
+<li>Patch original instructions</li>
+<li>Redirect execution with a <code>j</code> or <code>jal</code></li>
+</ul>
+</li>
+</ol>
+<p>Understanding MIPS calling conventions (especially <code>$ra</code>, <code>$sp</code>, and saved registers) is critical to avoiding crashes.</p>
+<hr>
+<h2>Example Repository</h2>
+<p>You can find a concrete example here:</p>
+<p><a href="https://github.com/AlgumCorrupto/mc3-function-hooking">https://github.com/AlgumCorrupto/mc3-function-hooking</a></p>
+<p>This repository contains multiple branches, but I recommend starting with the <code>master</code> branch.</p>
+<ul>
+<li><code>src/</code> contains the C code that gets injected.</li>
+<li><code>linker.asm</code> contains the Armips script that performs the injection and patching.</li>
+</ul>
+<p>Reading both together will give you a clear picture of how the workflow fits end-to-end.</p>
+<hr>
+<h2>Final Thoughts</h2>
+<p>Function hooking on the PlayStation 2 is not “easy” — but it is extremely powerful.</p>
+<p>Once you understand:</p>
+<ul>
+<li>MIPS instruction flow</li>
+<li>ELF structure</li>
+<li>The Emotion Engine calling conventions</li>
+<li>Binary patching</li>
+</ul>
+<p>You can modify nearly any behavior in a PS2 title.</p>
+<p>The barrier to entry is high, but the control it gives you is absolute.</p>
+
+  </section>
+</article>
+    </div>
+  </main>
+
+</body>
+</html>

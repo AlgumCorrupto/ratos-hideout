@@ -1,0 +1,102 @@
+<!-- src/_layouts/base.njk -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rato&#39;s Hideout | Home, sweet home</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <h1 class="mb-4!">ℜ𝔞𝔱𝔬'𝔰 ℌ𝔦𝔡𝔢𝔬𝔲𝔱</h1>
+    <ul>
+        <img src="/public/rat.svg" id="rato" />
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/blogs/">Blog</a></li>
+    </ul>
+</nav>
+
+<script>
+const rato = document.getElementById('rato');
+const baseScale = 1;       // normal size
+const amplitude = 0.05;     // scale oscillation +-0.2
+const period = 16000;       // 4 seconds for full sine wave
+const rotate = -5;         // degrees
+const tx = 1;             // em translation x
+const ty = -2.5;             // em translation y
+
+let start = null;
+
+function animate(time) {
+  if (!start) start = time;
+  const t = time - start;
+
+  // sine scaling
+  const scale = baseScale + amplitude * Math.sin((2 * Math.PI * t) / period);
+  //const scale = baseScale;
+
+  // apply rotation, translation, and scale
+  rato.style.transform = `rotate(${rotate}deg) translate(${tx}em, ${ty}em) scale(${scale})`;
+
+  requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
+</script>
+
+  <main class="">
+    <h3 class="main-name">Home, sweet home</h3>
+    <div class="prose">
+      
+<article>
+    <div class="fs1">
+  <p class="obs">Latest blogs</p>
+  <ul>
+    
+      
+        <li><a href="/blogs/function-hooking-ps2/">Function Hooking on PS2</a></li>
+      
+    
+  </ul>
+</div>
+    <section>
+      <hr>
+<h2>About me</h2>
+<p>Techie based in the jungles of South America. I mod games for fun, and also a robotics team member.</p>
+<p>Also known as AlgumCorrupto and rato.jpg.</p>
+<ul>
+<li>
+<p><a href="https://discord.gg/rpj2fmr73G">JD's Discord server</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/AlgumCorrupto">My Github profile</a>.</p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/@ratojpg">My Youtube profile</a>.</p>
+</li>
+<li>
+<p><a href="https://steamcommunity.com/id/greveagora/">My Steam profile</a>.</p>
+</li>
+</ul>
+<hr>
+<h2>About this website</h2>
+<figure>
+  <img src="/public/this-site.png" alt="This site" width="500">
+  <figcaption>Figure 1: A caricature depiction of this website.</figcaption>
+</figure>
+<p>This website is all about the cool shit i do in my free time.</p>
+<p>The other website I've made in Haskell was so unmaintanable and SHIT that I've decided to scrap that and make a new one.</p>
+<p>No bullshit unicorn tech this time.</p>
+<p>What, you're still reading? check out the tools page!</p>
+
+    </section>
+</article>
+    </div>
+  </main>
+
+</body>
+</html>
