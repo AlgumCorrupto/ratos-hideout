@@ -29,12 +29,6 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - name: Replace docs folder
-        run: |
-          rm -rf docs
-          mkdir docs
-          cp -r _site/* docs/
-
       - name: Commit and push docs
         run: |
           git config user.name "github-actions"
