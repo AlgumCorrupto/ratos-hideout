@@ -1,12 +1,5 @@
-@font-face {
-  font-family: 'Monaco'; /* A unique name you choose to use in your CSS */
-  src: url('/public/fonts/MonacoLinux.ttf') format('ttf'),
-}
-
-@layer base {
-    :root {
-        --font-sans: 'Titillium Web', ui-sans-serif, system-ui;
-        --font-serif: 'IBM Plex Serif', ui-serif, Georgia;
-        --font-mono: 'Monaco', ui-monospace, SFMono-Regular;
-    }
+ @theme {
+  --font-sans: 'Titillium Web', ui-sans-serif, system-ui;
+  --font-serif: 'IBM Plex Serif', ui-serif, Georgia;
+  --font-mono: 'IBM Plex Mono', ui-mono, Consolas;
 }
